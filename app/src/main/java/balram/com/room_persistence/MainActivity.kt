@@ -16,11 +16,9 @@ import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
     var list: List<Person> = ArrayList<Person>()
-    val context: Context= null!!;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        context=this;
         var flotingButton = findViewById(R.id.myFAB) as FloatingActionButton
         flotingButton.setOnClickListener {
 
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe { listOfPeople ->
                     var listview = findViewById(R.id.recyclerview) as ListView
-listview.adapter = ListExampleAdapter(context,listOfPeople);
+listview.adapter = ListExampleAdapter(this,listOfPeople);
                 }
     }
 
