@@ -26,14 +26,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun addPerson(firstName: String, lastName: String) {
-        val person = Person(0, firstName, lastName)
 
-        Single.fromCallable {
-            MyApp.database?.personDao()?.insert(person)
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe()
-    }
     fun registerAllPersonListener() {
 
         MyApp.database?.personDao()?.getAllPeople()
