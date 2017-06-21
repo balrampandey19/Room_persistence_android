@@ -10,5 +10,7 @@ Room also defines thread constraints which you can use to help address common is
 
 https://developer.android.com/topic/libraries/architecture/room.html
 
+https://codelabs.developers.google.com/codelabs/android-persistence/#0
+
 
 
