@@ -7,3 +7,8 @@ Room abstracts away some of the underlying implementation details related to wor
 You can use Room to observe changes to data stored in a database, and expose these changes as LiveData objects.
 Room also defines thread constraints which you can use to help address common issues that can negatively impact the performance of apps, such as accessing persistent storage from the main thread.
 
+
+https://developer.android.com/topic/libraries/architecture/room.html
+
+
+
