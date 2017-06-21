@@ -21,8 +21,7 @@ class ListAdapter : ArrayAdapter<Person> {
         var v = convertView as View
 
         if (v == null) {
-            val vi: LayoutInflater
-            vi = LayoutInflater.from(context)
+            val vi: LayoutInflater = LayoutInflater.from(context)
             v = vi.inflate(R.layout.itemlistrow, null)
         }
 

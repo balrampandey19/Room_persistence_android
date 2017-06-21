@@ -15,11 +15,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
-    var list: List<Person> = ArrayList<Person>()
+    var list: List<Person> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var flotingButton = findViewById(R.id.myFAB) as FloatingActionButton
+        registerAllPersonListener();
         flotingButton.setOnClickListener {
 
         }
@@ -40,19 +41,15 @@ class MainActivity : AppCompatActivity() {
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe { listOfPeople ->
                     var listview = findViewById(R.id.recyclerview) as ListView
-listview.adapter = ListExampleAdapter(this,listOfPeople);
+                  listview.adapter = ListExampleAdapter(this,listOfPeople)
                 }
     }
 
     private class ListExampleAdapter(context: Context, items: List<Person>) : BaseAdapter() {
 
-        private val mInflator: LayoutInflater
-        private val item: List<Person> = items;
+        private val mInflater: LayoutInflater = LayoutInflater.from(context)
+        private val item: List<Person> = items
 
-
-        init {
-            this.mInflator = LayoutInflater.from(context)
-        }
 
         override fun getCount(): Int {
             return item.size
@@ -70,30 +67,25 @@ listview.adapter = ListExampleAdapter(this,listOfPeople);
             val view: View?
             val vh: ListRowHolder
             if (convertView == null) {
-                view = this.mInflator.inflate(R.layout.itemlistrow, parent, false)
+                view = this.mInflater.inflate(R.layout.itemlistrow, parent, false)
                 vh = ListRowHolder(view)
                 view.tag = vh
             } else {
                 view = convertView
                 vh = view.tag as ListRowHolder
             }
-            var data: Person = item.get(position);
-            vh.firstNname.text =data.firstName;
-            vh.lastName.text = data.lastName;
+            var data: Person = item[position]
+            vh.firstName.text =data.firstName
+            vh.lastName.text = data.lastName
 
             return view
         }
     }
 
     private class ListRowHolder(row: View?) {
-         val firstNname: TextView
-         val lastName: TextView
+         val firstName: TextView = row?.findViewById(R.id.first_name) as TextView
+        val lastName: TextView = row?.findViewById(R.id.last_name) as TextView
 
 
-        init {
-            this.firstNname = row?.findViewById(R.id.first_name) as TextView
-            this.lastName = row?.findViewById(R.id.last_name) as TextView
-
-        }
     }
 }
